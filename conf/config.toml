@@ -1,0 +1,8 @@
+
+[node]
+  cookie = "6bc1t325xjo21c1"
+  epmd_port = 4369
+  hidden = false
+  listen_range_begin = 40001
+  listen_range_end = 44000
+  name = "gm@127.0.0.1"
