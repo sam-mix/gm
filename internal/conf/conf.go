@@ -16,6 +16,7 @@ var (
 	NodeHidden           bool   // 节点是否隐藏
 	ProcessName          string // 进程名称
 	GmPort               uint16 // 后端管理接口所在端口
+	NodeHandshakeVersion int    // 节点握手版本
 )
 
 func init() {
@@ -25,6 +26,7 @@ func init() {
 	viper.SetDefault("node.listen_range_end", uint16(44000))
 	viper.SetDefault("node.epmd_port", uint16(4369))
 	viper.SetDefault("node.hidden", false)
+	viper.SetDefault("node.handshake_version", 6)
 
 	viper.SetDefault("process.name", "gm_process")
 
@@ -41,6 +43,7 @@ func init() {
 	NodeListenRangeEnd = uint16(viper.GetUint("node.listen_port_end"))
 	NodeEpmdPort = uint16(viper.GetUint("node.epmd_port"))
 	NodeHidden = viper.GetBool("node.hidden")
+	NodeHandshakeVersion = viper.GetInt("node.handshake_version")
 
 	ProcessName = viper.GetString("process.name")
 

@@ -3,7 +3,7 @@ module gm
 go 1.17
 
 require (
-	github.com/halturin/ergo v1.2.6
+	github.com/ergo-services/ergo v1.999.201
 	github.com/spf13/viper v1.9.0
 )
 

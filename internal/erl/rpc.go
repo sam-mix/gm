@@ -1,32 +1,47 @@
 package erl
 
 import (
-	"gm/internal/node"
-	"gm/internal/process"
+	"gm/internal/conf"
+	"time"
 
-	"github.com/halturin/ergo"
-	"github.com/halturin/ergo/etf"
+	"github.com/ergo-services/ergo/etf"
+	"github.com/ergo-services/ergo/gen"
 )
 
-/**
- * rpc 调用处理
- */
-
-type GmErlangServer struct {
-	Node    *ergo.Node    // Erlang 节点
-	Process *ergo.Process // Erlang 执行进程
+type RPC struct {
+	Node string
+	Mod  string
+	Fun  string
+	Args []etf.Term
 }
 
-func NewServer() (*GmErlangServer, error) {
-	n := node.Create()
-	p, err := process.Spawn(n)
-	return &GmErlangServer{
-		Node:    n,
-		Process: p,
-	}, err
+func Call(node, mod, fun string, args ...etf.Term) etf.Term {
+	rpc := RPC{
+		Node: node,
+		Mod:  mod,
+		Fun:  fun,
+		Args: args,
+	}
+	n, err := Create()
+	if err != nil {
+		panic(err)
+	}
+	gs := &ErlGenServer{res: make(chan interface{}, 2)}
+	p, err := n.Spawn(conf.ProcessName, gen.ProcessOptions{}, gs)
+	if err != nil {
+		panic(err)
+	}
+	if p.Send(p.Self(), rpc); err != nil {
+		panic(err)
+	}
+	return waitForResultWithValue(gs.res)
 }
 
-// rpc call
-func (s *GmErlangServer) Call(nodeName, m, f string, a ...etf.Term) (etf.Term, error) {
-	return s.Process.CallRPCWithTimeout(60, nodeName, m, f, a)
+func waitForResultWithValue(w chan interface{}) etf.Term {
+	select {
+	case v := <-w:
+		return v
+	case <-time.After(time.Second * time.Duration(2)):
+		return "time out"
+	}
 }

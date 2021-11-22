@@ -1,32 +1,29 @@
-package node
-
-/**
- * Erlang node 节点相关
- *
- */
+package erl
 
 import (
 	"gm/internal/conf"
 
-	"github.com/halturin/ergo"
+	"github.com/ergo-services/ergo"
+	"github.com/ergo-services/ergo/node"
 )
 
 var (
-	nodeOps ergo.NodeOptions
+	nodeOps node.Options
 )
 
 func init() {
 	// 节点选项
-	nodeOps = ergo.NodeOptions{
+	nodeOps = node.Options{
 		ListenRangeBegin: conf.NodeListenRangeBegin,
 		ListenRangeEnd:   conf.NodeListenRangeEnd,
 		Hidden:           conf.NodeHidden,
 		EPMDPort:         conf.NodeEpmdPort,
+		HandshakeVersion: conf.NodeHandshakeVersion,
 	}
 
 }
 
 // 创建 erlang 节点
-func Create() *ergo.Node {
-	return ergo.CreateNode(conf.NodeName, conf.NodeCookie, nodeOps)
+func Create() (node.Node, error) {
+	return ergo.StartNode(conf.NodeName, conf.NodeCookie, nodeOps)
 }
