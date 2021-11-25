@@ -110,3 +110,11 @@ zap:
   encode-level: LowercaseColorLevelEncoder
   stacktrace-key: stacktrace
   log-in-console: true
+erl:
+  cookie: "123"
+  epmd-port: 4369
+  hidden: true
+  listen-range-begin: 40001
+  listen-range-end: 44000
+  node-name: "go-node@127.0.0.1"
+  process-name: "erlang-rpc-caller"

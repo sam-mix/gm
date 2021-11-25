@@ -38,6 +38,7 @@ require (
 	gorm.io/driver/postgres v1.2.2
 	gorm.io/gorm v1.22.3
 	nhooyr.io/websocket v1.8.6
+	github.com/halturin/ergo v1.2.6
 )
 
 require (
