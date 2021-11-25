@@ -68,7 +68,7 @@
       </div>
       <div class="login_panle_right" />
       <div class="login_panle_foot">
-        <div class="links">
+        <!-- <div class="links">
           <a href="http://doc.henrongyi.top/">
             <img src="@/assets/docs.png" class="link-icon" />
           </a>
@@ -81,9 +81,9 @@
           <a href="https://space.bilibili.com/322210472">
             <img src="@/assets/video.png" class="link-icon" />
           </a>
-        </div>
+        </div> -->
         <div class="copyright">
-          Copyright &copy; {{ curYear }} 💖 flipped-aurora
+          Copyright &copy; {{ curYear }} Power By Gin-Vue-Admin
         </div>
       </div>
     </div>
