@@ -90,7 +90,7 @@
     </div>
 
     <el-dialog v-model="dialogFormVisible" :before-close="closeDialog" :title="dialogTitle">
-      <warning-bar title="新增API，需要在角色管理内篇日志权限才可使用" />
+      <warning-bar title="新增API，需要在角色管理内配置权限才可使用" />
       <el-form ref="apiForm" :model="form" :rules="rules" label-width="80px">
         <el-form-item label="路径" prop="path">
           <el-input v-model="form.path" autocomplete="off" />
@@ -211,7 +211,7 @@ export default {
       this.apis = val
     },
     async onDelete() {
-      const ids = this.apis.forEach(item => item.ID)
+      const ids = this.apis.map(item => item.ID)
       const res = await deleteApisByIds({ ids })
       if (res.code === 0) {
         this.$message({

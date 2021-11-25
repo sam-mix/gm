@@ -144,10 +144,8 @@ export default {
       type: '',
       deleteVisible: false,
       multipleSelection: [],
-      {{- range .Fields}}
-          {{- if .DictType }}
-      {{ .DictType }}Options: [],
-          {{- end }}
+      {{- range $index, $element := .DictTypes }}
+      {{ $element }}Options: [],
       {{- end }}
       formData: {
     {{- range .Fields}}
@@ -158,7 +156,7 @@ export default {
         {{.FieldJson}}: '',
       {{- end }}
       {{- if eq .FieldType "int" }}
-        {{.FieldJson}}: 0,
+        {{.FieldJson}}: {{- if .DictType}} undefined{{ else }} 0{{- end }},
       {{- end }}
       {{- if eq .FieldType "time.Time" }}
         {{.FieldJson}}: new Date(),
@@ -172,10 +170,8 @@ export default {
   },
   async created() {
     await this.getTableData()
-{{- range .Fields }}
-  {{- if .DictType }}
-    await this.getDict('{{.DictType}}')
-  {{- end }}
+{{- range $index, $element := .DictTypes }}
+    await this.getDict('{{$element}}')
 {{- end }}
   },
   methods: {
@@ -249,7 +245,7 @@ export default {
         {{.FieldJson}}: '',
         {{- end }}
         {{- if eq .FieldType "int" }}
-        {{.FieldJson}}: 0,
+        {{.FieldJson}}: {{- if .DictType }} undefined{{ else }} 0{{- end }},
         {{- end }}
         {{- if eq .FieldType "time.Time" }}
         {{.FieldJson}}: new Date(),
