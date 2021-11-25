@@ -16,6 +16,7 @@ require (
 	github.com/go-redis/redis/v8 v8.11.0
 	github.com/go-sql-driver/mysql v1.6.0
 	github.com/gookit/color v1.3.1
+	github.com/halturin/ergo v1.2.6
 	github.com/jordan-wright/email v0.0.0-20200824153738-3f5bafa1cd84
 	github.com/mojocn/base64Captcha v1.3.1
 	github.com/natefinch/lumberjack v2.0.0+incompatible
@@ -38,7 +39,6 @@ require (
 	gorm.io/driver/postgres v1.2.2
 	gorm.io/gorm v1.22.3
 	nhooyr.io/websocket v1.8.6
-	github.com/halturin/ergo v1.2.6
 )
 
 require (
