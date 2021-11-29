@@ -42,6 +42,9 @@ func (d *dictionaryDetail) Initialize() error {
 		{Label: "longblob", Value: 8, Status: status, Sort: 8, SysDictionaryID: 5},
 		{Label: "longtext", Value: 9, Status: status, Sort: 9, SysDictionaryID: 5},
 		{Label: "tinyint", Status: status, SysDictionaryID: 6},
+
+		{Label: "男", Value: 0, Status: status, Sort: 0, SysDictionaryID: 1},
+		{Label: "女", Value: 1, Status: status, Sort: 1, SysDictionaryID: 1},
 	}
 	if err := global.GVA_DB.Create(&entities).Error; err != nil {
 		return errors.Wrap(err, d.TableName()+"表数据初始化失败!")
