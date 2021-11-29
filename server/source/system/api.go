@@ -120,8 +120,5 @@ func (a *api) Initialize() error {
 }
 
 func (a *api) CheckDataExist() bool {
-	if errors.Is(global.GVA_DB.Where("path = ? AND method = ?", "/excel/downloadTemplate", "GET").First(&system.SysApi{}).Error, gorm.ErrRecordNotFound) {
-		return false
-	}
-	return true
+	return !errors.Is(global.GVA_DB.Where("path = ? AND method = ?", "/excel/downloadTemplate", "GET").First(&system.SysApi{}).Error, gorm.ErrRecordNotFound)
 }

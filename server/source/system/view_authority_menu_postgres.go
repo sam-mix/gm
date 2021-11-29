@@ -2,10 +2,11 @@ package system
 
 import (
 	"fmt"
+	"strings"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/pkg/errors"
-	"strings"
 )
 
 var ViewAuthorityMenuPostgres = new(viewAuthorityMenuPostgres)
@@ -51,8 +52,5 @@ func (a *viewAuthorityMenuPostgres) Initialize() error {
 func (a *viewAuthorityMenuPostgres) CheckDataExist() bool {
 	err1 := global.GVA_DB.Find(&[]system.SysMenu{}).Error
 	err2 := errors.New(fmt.Sprintf("Error 1146: Table '%v.%v' doesn't exist", global.GVA_CONFIG.Pgsql.Dbname, a.TableName()))
-	if errors.As(err1, &err2) {
-		return false
-	}
-	return true
+	return !errors.As(err1, &err2)
 }

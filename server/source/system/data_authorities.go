@@ -1,12 +1,13 @@
 package system
 
 import (
+	"reflect"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"reflect"
 )
 
 var DataAuthorities = new(dataAuthorities)
@@ -32,11 +33,9 @@ func (a *dataAuthorities) Initialize() error {
 	return nil
 }
 
+// 判断是否存在数据
 func (a *dataAuthorities) CheckDataExist() bool {
-	if errors.Is(global.GVA_DB.Where("sys_authority_authority_id = ? AND data_authority_id_authority_id = ?", "9528", "9528").First(&AuthoritiesResources{}).Error, gorm.ErrRecordNotFound) { // 判断是否存在数据
-		return false
-	}
-	return true
+	return !errors.Is(global.GVA_DB.Where("sys_authority_authority_id = ? AND data_authority_id_authority_id = ?", "9528", "9528").First(&AuthoritiesResources{}).Error, gorm.ErrRecordNotFound)
 }
 
 // AuthoritiesResources 角色资源表

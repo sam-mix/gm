@@ -1,12 +1,13 @@
 package system
 
 import (
+	"reflect"
+
 	"github.com/flipped-aurora/gin-vue-admin/server/global"
 	"github.com/flipped-aurora/gin-vue-admin/server/model/system"
 	"github.com/pkg/errors"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
-	"reflect"
 )
 
 var AuthoritiesMenus = new(authoritiesMenus)
@@ -72,11 +73,9 @@ func (a *authoritiesMenus) Initialize() error {
 	return nil
 }
 
+// 判断是否存在数据
 func (a *authoritiesMenus) CheckDataExist() bool {
-	if errors.Is(global.GVA_DB.Where("sys_base_menu_id = ? AND sys_authority_authority_id = ?", 17, "9528").First(&AuthorityMenus{}).Error, gorm.ErrRecordNotFound) { // 判断是否存在数据
-		return false
-	}
-	return true
+	return !errors.Is(global.GVA_DB.Where("sys_base_menu_id = ? AND sys_authority_authority_id = ?", 17, "9528").First(&AuthorityMenus{}).Error, gorm.ErrRecordNotFound)
 }
 
 type AuthorityMenus struct {

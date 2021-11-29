@@ -49,9 +49,7 @@ func (m *menu) Initialize() error {
 	return nil
 }
 
+// 判断是否存在数据
 func (m *menu) CheckDataExist() bool {
-	if errors.Is(global.GVA_DB.Where("path = ?", "autoCodeEdit/:id").First(&system.SysBaseMenu{}).Error, gorm.ErrRecordNotFound) { // 判断是否存在数据
-		return false
-	}
-	return true
+	return !errors.Is(global.GVA_DB.Where("path = ?", "autoCodeEdit/:id").First(&system.SysBaseMenu{}).Error, gorm.ErrRecordNotFound)
 }

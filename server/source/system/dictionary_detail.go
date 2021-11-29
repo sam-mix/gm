@@ -52,9 +52,7 @@ func (d *dictionaryDetail) Initialize() error {
 	return nil
 }
 
+// 判断是否存在数据
 func (d *dictionaryDetail) CheckDataExist() bool {
-	if errors.Is(global.GVA_DB.Where("id = ?", 23).First(&system.SysDictionaryDetail{}).Error, gorm.ErrRecordNotFound) { // 判断是否存在数据
-		return false
-	}
-	return true
+	return !errors.Is(global.GVA_DB.Where("id = ?", 23).First(&system.SysDictionaryDetail{}).Error, gorm.ErrRecordNotFound)
 }
