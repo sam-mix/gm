@@ -7,7 +7,7 @@ aliyun-oss:
   base-path: yourBasePath
 autocode:
   transfer-restart: true
-  root: D:\dev\ws_go\gin-vue-admin
+  root: D:\dev\ws_go\gm
   server: /server
   server-api: /api/v1/autocode
   server-initialize: /initialize
@@ -33,13 +33,21 @@ email:
   is-ssl: true
   secret: xxx
   nickname: test
+erl:
+  cookie: "123"
+  epmd-port: 4369
+  hidden: true
+  listen-range-begin: 40001
+  listen-range-end: 44000
+  node-name: go-node@127.0.0.1
+  process-name: erlang-rpc-caller
 excel:
   dir: ./resource/excel/
 jwt:
-  buffer-time: 86400
-  expires-time: 604800
-  issuer: qmPlus
   signing-key: fbc35b32-e68d-4d9b-a5b5-7bcf19f32eef
+  expires-time: 604800
+  buffer-time: 86400
+  issuer: qmPlus
 local:
   path: uploads/file
 mysql:
@@ -106,15 +114,7 @@ zap:
   format: console
   prefix: '[github.com/flipped-aurora/gin-vue-admin/server]'
   director: log
-  showLine: true
+  showLine: false
   encode-level: LowercaseColorLevelEncoder
   stacktrace-key: stacktrace
   log-in-console: true
-erl:
-  cookie: "123"
-  epmd-port: 4369
-  hidden: true
-  listen-range-begin: 40001
-  listen-range-end: 44000
-  node-name: "go-node@127.0.0.1"
-  process-name: "erlang-rpc-caller"
